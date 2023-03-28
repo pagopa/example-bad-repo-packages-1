@@ -6,10 +6,10 @@ Reposiroty configuration:
 - `main` has branch protection enabled with a review from `CODEOWNERS`
 - anyone in PagoPA GitHub Organization has `write` permission on this repository
 - `packages` inherit access from source repository
-- GitHub Actions has access to `packages`
 - repository package is a docker image
+- GitHub Actions has access to `packages`
 
-You can check settings `packages` here https://github.com/orgs/pagopa/packages/container/example-bad-repo-packages/settings
+You can check `packages` settings here https://github.com/orgs/pagopa/packages/container/example-bad-repo-packages/settings
 
 Attack scenario #1:
 - a user with `write` permission can modify an existing docker image tagged `v2` in `packages` using his personal PAT token
@@ -24,6 +24,9 @@ docker image push ghcr.io/pagopa/example-bad-repo-packages:v2
 
 Attack scenario #2:
 - a user with `write` permission can modify an existing docker image tagged `v2` in `packages` creating a Pull Request (example Pull Request https://github.com/pagopa/example-bad-repo-packages/pull/1)
+
+Safe scenario:
+- using docker image sha will prevent a possibile supply chain attack. Some artifact format doesn't support sha, for example maven, so you need to protect the write access to `packages` to prevent tampering.
 
 ## How to configure the GitHub Packages safetly?
 
