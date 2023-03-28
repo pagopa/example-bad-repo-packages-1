@@ -25,6 +25,9 @@ docker image push ghcr.io/pagopa/example-bad-repo-packages:v2
 Attack scenario #2:
 - a user with `write` permission can modify an existing docker image tagged `v2` in `packages` creating a Pull Request (example Pull Request https://github.com/pagopa/example-bad-repo-packages/pull/1)
 
+Safe scenario:
+- using docker image sha will prevent a possibile supply chain attack. Some artifact format doesn't support sha, for example maven, so you need to protect the write access to `packages` to prevent tampering.
+
 ## How to configure the GitHub Packages safetly?
 
 See this example https://github.com/pagopa/example-good-repo-packages
