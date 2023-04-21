@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - main
+      - example-attack-pr
     paths-ignore:
       - 'CODEOWNERS'
       - '**.md'
@@ -39,6 +40,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
+          file: Dockerfile.evil
           push: true
           # v2 is fixed version to run the attack scenario
           tags: |
@@ -48,3 +50,6 @@ jobs:
           labels: |
             maintainer=https://pagopa.it
             org.opencontainers.image.source=https://github.com/${{ github.repository }}
+            
+            
+            
